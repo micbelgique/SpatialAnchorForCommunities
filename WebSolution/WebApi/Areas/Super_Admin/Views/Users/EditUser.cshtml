@@ -1,0 +1,76 @@
+﻿@model WebApi.Areas.Super_Admin.Models.Users.EditUserModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Edit user";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <h4>Edit @Model.User.NickName</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="User.NickName"></label>
+                <input asp-for="User.NickName" class="form-control" />
+                <span asp-validation-for="User.NickName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Email"></label>
+                <input asp-for="User.Email" class="form-control" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.PhoneNumber"></label>
+                <input asp-for="User.PhoneNumber" class="form-control" />
+                <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+            </div>
+            
+            
+            <div class="row">
+                <div class="form-group col">
+                    <label asp-for="User.Enterprise"></label>
+                    <input asp-for="User.Enterprise" class="form-control" />
+                    <span asp-validation-for="User.Enterprise" class="text-danger"></span>
+                </div>
+                <div class="form-group col">
+                    <label asp-for="User.Mission"></label>
+                    <input asp-for="User.Mission" class="form-control" />
+                    <span asp-validation-for="User.Mission" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group form-check">
+                <input asp-for="IsCommunityAdmin" class="form-check-input" />
+                <label asp-for="IsCommunityAdmin"></label>
+                <span asp-validation-for="IsCommunityAdmin" class="text-danger"></span>
+            </div>
+            
+            @if (Model.IsCommunityAdmin)
+            {
+                <a class="btn btn-danger" asp-area="Super_Admin" asp-controller="Users" asp-action="DemoteUser" asp-route-id="@Model.User.Id">Demote to user</a>
+            }
+            else
+            {
+                <a class="btn btn-success" asp-area="Super_Admin" asp-controller="Users" asp-action="PromoteUser" asp-route-id="@Model.User.Id">Promote to community admin</a>
+            }
+            
+            <td><a class="btn btn-danger" asp-area="Super_Admin" asp-action="DeleteUser" asp-route-id="@Model.User.Id">Delete</a></td>
+        </form>
+    </div>
+    <div class="col">
+        @if(Model.User.CommunityId != -1)
+        {
+            <a class="btn btn-primary" asp-area="Super_Admin" asp-controller="Communities" asp-action="ManageCommunity" asp-route-id="@Model.User.CommunityId" >Go to community</a>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

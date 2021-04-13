@@ -1,0 +1,42 @@
+﻿@model Application.Common.Queries.Response<Application.Dtos.CommunityDTO>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Communities";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Url</th>
+            <th scope="col">Details/Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var community in Model.Data)
+        {
+            <tr>
+                <th>@community.Id</th>
+                <td>
+                    <img src="@community.PictureUrl" alt="" width="50" height="50">
+                </td>
+                <td>@community.Name</td>
+                <td>
+                    <a href="@community.InfoUrl">about</a>
+                </td>
+
+                <td><a asp-area="Super_Admin" asp-controller="Communities" asp-action="ManageCommunity" asp-route-id="@community.Id" class="btn btn-sm btn-primary">Click</a></td>
+            </tr>
+    
+        }
+        </tbody>
+    </table>
+    
+    <a asp-area="Super_Admin" asp-controller="Communities" asp-action="AddCommunity">Add a community</a>
+</div>

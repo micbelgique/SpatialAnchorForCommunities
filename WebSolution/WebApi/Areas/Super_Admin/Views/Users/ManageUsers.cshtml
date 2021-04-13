@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Users";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model WebApi.Areas.Super_Admin.Models.Users.ManageUsersModel
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <table class="table">
+        <caption>List of users</caption>
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">NickName</th>
+            <th scope="col">Email</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Enterprise</th>
+            <th scope="col">Mission</th>
+            <th scope="col">Community</th>
+            <th scope="col">Role</th>
+            <th scope="col">Details/Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Model.Users.Data)
+        {
+            <tr>
+                <td>@user.NickName</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.Enterprise</td>
+                <td>@user.Mission</td>
+                <td>@Model.Communities.Data.FirstOrDefault(c => c.Id == user.CommunityId)?.Name</td>
+                <td>@user.Role</td>
+                <td><a class="btn btn-sm btn-primary" asp-area="Super_Admin" asp-action="EditUser" asp-route-id="@user.Id">Click</a></td>
+            </tr>
+
+        }
+        </tbody>
+    </table>
+</div>
+
+

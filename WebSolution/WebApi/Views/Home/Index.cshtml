@@ -1,0 +1,131 @@
+﻿@model IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <div id="map" style="height: 500px"></div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxzS4IA4H5bvIzqeT_KEp6uCoJ6IJK6mM&callback=initMap&libraries=&v=weekly" async></script>
+
+<script>
+    let map;
+    let infowindow;
+
+    function initMap() {
+                
+         map = new google.maps.Map(document.getElementById("map"), {
+             center: {lat: 0, lng: 0},
+           zoom: 2,
+            styles: [    
+                   {
+                       featureType: "poi",
+                       elementType: "labels",
+                       stylers: [{ visibility: "off" }]
+                   }
+               ]
+         });
+         
+         CallApi();
+    }
+    
+    function CallApi(){
+    let request = new XMLHttpRequest();
+        request.open('GET', './api/CommunitiesAPI', true)
+        request.onloadend = function ()
+        {
+            var communities = JSON.parse(this.response);
+            if (request.status >= 200 && request.status < 400) {
+              const image =
+                           "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+                       
+               for (let community of communities.data)
+               {
+                   let epicenter = {lat: community.epiCenter.latitude, lng:community.epiCenter.longitude };
+                   console.debug(community);
+                   let marker = new google.maps.Marker({
+                       position: epicenter,
+                       map,
+                       title: community.name,
+                       icon : image, 
+                   });
+                   
+                   marker.infowindow = new google.maps.InfoWindow({
+                       content: community.name,
+                   });
+                   marker.infowindow.open(map,marker);
+                   
+                   let cityCircle = new google.maps.Circle({
+                         strokeColor: "#FF0000",
+                         strokeOpacity: 0.8,
+                         strokeWeight: 2,
+                         fillColor: "#FF0000",
+                         fillOpacity: 0.35,
+                         map,
+                         center: epicenter,
+                         radius: community.epiCenter.radius,
+                       });
+               }
+            } else {
+              console.log('error')
+            }
+        }
+       
+        request.send();
+        
+        let anchorsRequest = new XMLHttpRequest();
+        anchorsRequest.open('GET', './api/AnchorsAPI', true)
+        anchorsRequest.onloadend = function ()
+        {
+            var anchors = JSON.parse(this.response);
+            if (anchorsRequest.status >= 200 && request.status < 400) {
+                       
+               for (let anchor of anchors.data)
+               {
+                   console.debug(anchor);
+                   let marker = new google.maps.Marker({
+                       position: {lat: anchor.location.longitude, lng:anchor.location.latitude },
+                       map,
+                       title: anchor.name,
+                   });
+                   
+                   marker.addListener("click", () =>{
+                        GetUserDetails(anchor.userId, marker);
+                   });
+               }
+            } else {
+              console.log(request.status)
+            }
+        }
+       
+        anchorsRequest.send();
+    }
+    
+    function GetUserDetails(userId, marker)
+    {
+        let userRequest = new XMLHttpRequest();
+        userRequest.open('GET', `http://85.201.245.13:5000/api/UsersAPI/${userId}`, true)
+        userRequest.onloadend = function ()
+        {
+            var user = JSON.parse(this.response);
+            if (marker.infowindow !== undefined)
+            {
+                marker.infowindow.close();
+                 marker.infowindow.open(map,marker);
+            }
+            else
+            {
+                marker.infowindow = new google.maps.InfoWindow({
+                    content: user.nickName,
+                });
+                marker.infowindow.open(map,marker);
+            }
+            
+        }
+        
+        userRequest.send();
+    }
+    
+</script>
