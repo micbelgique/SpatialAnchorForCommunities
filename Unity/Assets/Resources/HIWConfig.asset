@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c0102352a46fe4c8ecdc02689849ae, type: 3}
   m_Name: HIWConfig
   m_EditorClassIdentifier: 
-  apiBaseUrl: http://85.201.245.13:5000
+  apiBaseUrl: https://hiw-communities.azurewebsites.net

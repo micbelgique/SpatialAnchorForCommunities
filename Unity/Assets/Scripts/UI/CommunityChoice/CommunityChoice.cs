@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CommunityChoice : MonoBehaviour
 {
     public GameObject template;
-    public GameObject templateNone;
 
     private ResultData<Community> _resultData;
 
@@ -36,11 +36,6 @@ public class CommunityChoice : MonoBehaviour
                     });
                 }
 
-                GameObject game = Instantiate(templateNone, transform);
-                game.GetComponent<Button>().onClick.AddListener(delegate()
-                {
-                    ItemClicked("none");
-                });
             }
             else
             {

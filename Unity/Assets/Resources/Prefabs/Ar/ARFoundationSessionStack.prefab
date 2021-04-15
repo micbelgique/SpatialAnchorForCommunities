@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 4845545821097106987}
   - component: {fileID: 994748070}
   - component: {fileID: 4240005291849877746}
+  - component: {fileID: 5940973431464082038}
   m_Layer: 0
   m_Name: ARFoundationSessionStack
   m_TagString: MainCamera
@@ -252,3 +253,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b42ec5915d42a4e8a9f9a7e31730ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5940973431464082038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7557246849223751478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 357f46f81d9ccdc49bec3c6816bbab89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TogglePlaneDetectionText: {fileID: 0}

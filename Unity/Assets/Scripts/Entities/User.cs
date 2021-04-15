@@ -1,25 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
+[Serializable]
 public class User
 {
-    public int id;
+    public string id;
     public string nickName;
     public string email;
     public string phoneNumber;
     public string socialMedia;
-    public string function;
+    public string enterprise;
     public string mission;
-
-    public User(string nickame, string email, string phoneNumber, string socialMedia, string function, string mission)
+    public string community;
+    public int communityId;
+    public string password;
+    
+    public User(string nickame, string email, string phoneNumber, string socialMedia, string function, string mission, string password)
     {
         this.nickName = nickame;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.socialMedia = socialMedia;
-        this.function = function;
+        this.enterprise = function;
         this.mission = mission;
+        this.password = password;
     }
 
     public User()

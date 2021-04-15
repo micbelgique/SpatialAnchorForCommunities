@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class CommunityCard : MonoBehaviour
 {
-    public Text communityName;
-    public Text communityDescription;
+    public TMP_Text communityName;
+    public TMP_Text communityDescription;
     public RawImage communityImage;
 
     public void SetCommunityName(string name)

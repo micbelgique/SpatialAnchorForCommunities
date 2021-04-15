@@ -27,13 +27,13 @@ namespace Microsoft.Azure.SpatialAnchors.Unity.Examples
         void Awake()
         {
             GameObject targetCamera = EditorCameraTree;
-            #if UNITY_WSA
-                        targetCamera = HoloLensCameraTree;
-            #elif UNITY_ANDROID || UNITY_IOS
-                       targetCamera = ARFoundationCameraTree;
-            #elif !UNITY_EDITOR
-                         Debug.LogError("Unexpected platform for XRCameraPicker. Did you intend to include this script in your scene?");     
-            #endif
+#if UNITY_WSA
+            targetCamera = HoloLensCameraTree;
+#elif UNITY_ANDROID || UNITY_IOS
+           targetCamera = ARFoundationCameraTree;
+#elif !UNITY_EDITOR
+             Debug.LogError("Unexpected platform for XRCameraPicker. Did you intend to include this script in your scene?");     
+#endif
             Instantiate(targetCamera);
         }
     }

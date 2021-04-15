@@ -83,6 +83,7 @@ public class ReferencePointCreator : MonoBehaviour
         return results.Count > 0;
     }
 
+
     static List<ARRaycastHit> s_Hits = new List<ARRaycastHit>();
 
     List<ARAnchor> m_ReferencePoints;

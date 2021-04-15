@@ -9,12 +9,23 @@ public class Anchor
      public string identifier;
      public User user;
      public string model;
+     public string userId;
 }
 
+[Serializable]
 public class AnchorDTO
 {
+     public int id;
      public string identifier;
-     public string modelID;
-     public int userID;
+     public string model;
+     public string userId;
+     public User user;
+     public List<TagInterraction> interactions;
+     public string creationDate;
+     public string lastUpdateDate;
+     public float longitude;
+     public float latitude;
+     public int srid;
+     public string pictureUrl;
 }
 
